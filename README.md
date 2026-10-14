@@ -6,7 +6,7 @@
 
 A statusline for Claude Code. It shows where your 5-hour and weekly limits will land at reset, how long you can keep going at your current pace, and your context, git, and pull request state.
 
-It uses only the Python standard library. It makes no network calls and reads no tokens.
+It uses only the Python standard library. It makes no network calls and reads no tokens. It also has one line that stays hidden until you turn it on: see [the easter egg](#easter-egg-to-himself).
 
 <img src="assets/paceline.gif" alt="paceline in a terminal. The 5-hour bar fills from 5% to 86% and its color climbs from blue to red as the projection at reset passes 100%. An 'empty ~23m' runway clock then appears. Below it are the weekly and context bars, a Codex row, and the folder, branch, pull request, and cache line." width="100%">
 
@@ -46,6 +46,27 @@ If you also use Codex, paceline reads the newest Codex session log under `~/.cod
 ### Narrow terminals
 
 paceline reads the terminal width and drops detail until every line fits. The order is: reset countdowns, the runway, projection arrows, then shorter bars, then the cache segment, then the Codex row.
+
+## Easter egg: To Himself
+
+Turn on one setting and paceline adds a line from Marcus Aurelius under its rows. The Greek title of the Meditations is usually given as *To Himself*, and the line uses that name.
+
+```json
+{ "quotes": true }
+```
+
+The quote follows your 5-hour pace. paceline sorts 40 quotes into four tiers of ten, and picks the tier from the projected 5-hour load. The line takes the color of that load.
+
+| Projected 5-hour load | Tier | Example |
+|---|---|---|
+| under 50% | Start, blue | To Himself: Confine yourself to the present. |
+| 50% to 70% | Center, green | To Himself: Nowhere can a man retreat better than into his own soul. |
+| 70% to 90% | Strive, amber | To Himself: Always take the short road; the short road is nature's. |
+| 90% and over | Endure, red | To Himself: Be like the headland the waves break on; it stands, the sea falls still. |
+
+A light session gets a push to start. A steady one gets calm. A heavy one gets a reason to keep going, and a session near the limit gets a reason to bear it. Within a tier, a new quote comes every 2 minutes.
+
+The line needs the 5-hour bar, so it shows only on a Pro or Max plan. It hides during the first 6 minutes of a window, before a projection exists, and when it does not fit the terminal width. The text follows the public-domain George Long translation from 1862, with modernized wording.
 
 ## Install
 
@@ -91,7 +112,7 @@ Create `~/.config/paceline/config.json`, or `%APPDATA%\paceline\config.json` on 
 |---|---|---|
 | `theme` | `auto` | `auto`, `dark`, `light`, or `mono`. See [Themes](#themes). |
 | `codex` | `true` | Show the Codex row. |
-| `quotes` | `false` | Add a line with a quote from Marcus Aurelius, chosen by the 5-hour load. |
+| `quotes` | `false` | Add the [To Himself](#easter-egg-to-himself) line, a Marcus Aurelius quote chosen by the 5-hour load. |
 | `bar_width` | `8` | Bar width in cells, from 3 to 20. |
 | `countdown_min_load` | `50` | The load in percent at which the reset countdown appears. |
 | `runway_minutes` | `10` | How many recent minutes the runway uses to measure your burn, from 2 to 60. |
