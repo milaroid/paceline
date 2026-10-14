@@ -1,0 +1,14 @@
+{
+  "name": "paceline",
+  "description": "paceline, a statusline for Claude Code that shows where your usage limits will land.",
+  "owner": {
+    "name": "Milorad Teodorovic"
+  },
+  "plugins": [
+    {
+      "name": "paceline",
+      "source": "./",
+      "description": "A statusline for Claude Code that shows where your 5-hour and weekly limits will land at reset, how long you can keep going, plus context, git, and PR state. Standard-library Python, no network calls."
+    }
+  ]
+}
