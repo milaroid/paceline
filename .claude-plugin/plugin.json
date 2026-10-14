@@ -1,0 +1,15 @@
+{
+  "name": "paceline",
+  "displayName": "paceline",
+  "version": "1.0.0",
+  "description": "A statusline for Claude Code that shows where your 5-hour and weekly limits will land at reset, how long you can keep going, plus context, git, and PR state. Standard-library Python, no network calls.",
+  "author": {
+    "name": "Milorad Teodorovic",
+    "email": "milorad.teodorovic11@gmail.com"
+  },
+  "homepage": "https://github.com/milaroid/paceline",
+  "repository": "https://github.com/milaroid/paceline",
+  "license": "MIT",
+  "keywords": ["statusline", "usage", "rate-limits", "quota", "codex"],
+  "commands": "./commands"
+}
