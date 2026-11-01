@@ -80,9 +80,14 @@ def build(data, env, now):
     return lines + [quote] if quote else lines
 
 
+def _quote_window(claude):
+    """The 5-hour window, else the weekly window for plans with no 5-hour limit."""
+    by_label = {w.label: w for w in claude.windows}
+    return by_label.get("5h") or by_label.get("7d")
+
+
 def _quote(ctx, claude, limit):
-    five = next((w for w in claude.windows if w.label == "5h"), None)
-    quote = quotes.line(ctx.theme, five, ctx.now, theme.load_color)
+    quote = quotes.line(ctx.theme, _quote_window(claude), ctx.now, theme.load_color)
     if quote and limit and layout.visible_width(quote) > limit:
         return None
     return quote

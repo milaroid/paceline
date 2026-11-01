@@ -66,7 +66,7 @@ The quote follows your 5-hour pace. paceline sorts 40 quotes into four tiers of 
 
 A light session gets a push to start. A steady one gets calm. A heavy one gets a reason to keep going, and a session near the limit gets a reason to bear it. Within a tier, a new quote comes every 2 minutes.
 
-The line needs the 5-hour bar, so it shows only on a Pro or Max plan. It hides during the first 6 minutes of a window, before a projection exists, and when it does not fit the terminal width. The text follows the public-domain George Long translation from 1862, with modernized wording.
+The line needs a rate-limit bar, so it shows only on a Pro, Max, or Ultra plan. A verified Ultra account has no 5-hour limit, so there the line follows the projected weekly load with the same tiers. It hides before a projection exists, which is the first 2% of a window: 6 minutes of the 5-hour window, or about 3 hours and 22 minutes of the week. It also hides when it does not fit the terminal width. The text follows the public-domain George Long translation from 1862, with modernized wording.
 
 ## Install
 
@@ -149,7 +149,7 @@ paceline writes only inside its config folder: `state.json` holds the recent usa
 ## Requirements
 
 - Python 3.9 or later. The Python that ships with macOS works.
-- Claude Code with statusline support. The 5-hour and weekly bars need a Claude Pro or Max plan. Claude Code sends no rate limits for API-key use.
+- Claude Code with statusline support. The 5-hour and weekly bars need a Claude Pro, Max, or Ultra plan. A verified Ultra account has no 5-hour limit, so it gets only the weekly bar. Claude Code does not send the separate weekly Fable limit of the Max and Ultra plans to the statusline, so paceline cannot show it. Claude Code sends no rate limits for API-key use.
 - macOS, Linux, or Windows.
 
 ## Tests

@@ -69,7 +69,7 @@ def tier(proj):
 
 
 def line(theme, window, now, color_for):
-    """The quote line for the 5-hour window, or None when its projection is unknown."""
+    """The quote line for the given rate-limit window, or None when its projection is unknown."""
     if window is None:
         return None
     proj = project(window.used, window.resets_at, window.seconds, now)
