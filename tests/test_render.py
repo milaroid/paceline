@@ -174,6 +174,17 @@ class BuildTest(unittest.TestCase):
         self.assertFalse(any("codex" in x for x in lines))
         self.assertTrue(lines[-1].startswith("To Himself: "))
 
+    def test_quote_uses_weekly_window_without_five_hour(self):
+        import paths
+        where = paths.resolve(self.env)
+        os.makedirs(where.config_dir, exist_ok=True)
+        with open(where.config_file, "w", encoding="utf-8") as fh:
+            json.dump({"codex": False, "quotes": True}, fh)
+        limits = {"seven_day": subscriber_limits()["seven_day"]}
+        lines = self.build(claude_payload(rate_limits=limits))
+        self.assertNotIn("5h", lines[0])
+        self.assertTrue(lines[-1].startswith("To Himself: "))
+
     def test_runway_appears_after_samples(self):
         data = claude_payload(rate_limits=subscriber_limits(five=55.0))
         paceline.build(data, self.env, NOW - 300)
